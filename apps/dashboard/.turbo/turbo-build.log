@@ -1,0 +1,9 @@
+
+
+> dashboard@0.1.0 build /Users/aldiyarbolegenov/my-monorepo/apps/dashboard
+> next build
+
+  [1m[38;2;173;127;168m▲ Next.js 14.2.6[39m[22m
+  - Environments: .env
+
+ [37m[1m [22m[39m Creating an optimized production build ...

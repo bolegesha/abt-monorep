@@ -1,0 +1,22 @@
+
+
+> web@0.1.0 build /Users/aldiyarbolegenov/my-monorepo/apps/web
+> next build
+
+  [1m[38;2;173;127;168m▲ Next.js 14.2.6[39m[22m
+
+ [37m[1m [22m[39m Creating an optimized production build ...
+ [32m[1m✓[22m[39m Compiled successfully
+[?25l [37m[1m [22m[39m Linting and checking validity of types  [36m.[39m[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m..[39m[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m...[39m[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m.[39m[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m..[39m[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m...[39m[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m.[39m[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m..[39m[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m...[39m[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m.[39m[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m..[39m[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m...[39m[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m.[39m[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m..[39m[31mFailed to compile.
+[39m
+[36m../../packages/database/src/hooks/use-shipping-data.ts[39m:[33m77[39m:[33m15[39m
+[31m[1mType error[22m[39m: Type 'number' is not assignable to type 'string'.
+
+[0m [90m 75 |[39m               price_per_kg_composition[33m:[39m rate[33m.[39mpricePerKgComposition[33m,[39m[0m
+[0m [90m 76 |[39m               price_per_kg_door[33m:[39m rate[33m.[39mpricePerKgDoor[33m,[39m[0m
+[0m[31m[1m>[22m[39m[90m 77 |[39m               estimated_delivery_days_min[33m:[39m rate[33m.[39mestimatedDeliveryDaysMin[33m,[39m[0m
+[0m [90m    |[39m               [31m[1m^[22m[39m[0m
+[0m [90m 78 |[39m               estimated_delivery_days_max[33m:[39m rate[33m.[39mestimatedDeliveryDaysMax[33m,[39m[0m
+[0m [90m 79 |[39m               base_cost_composition[33m:[39m rate[33m.[39mbaseCostComposition[33m,[39m[0m
+[0m [90m 80 |[39m               base_cost_door[33m:[39m rate[33m.[39mbaseCostDoor[33m,[39m[0m
+[?25h[41m[30m ELIFECYCLE [39m[49m [31mCommand failed with exit code 1.[39m
