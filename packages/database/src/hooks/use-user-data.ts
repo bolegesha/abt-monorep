@@ -27,7 +27,9 @@ export function useUserData() {
     setLoading(true);
     setError(null);
     try {
+      console.log('Attempting login...');
       const { user, session } = await signIn({ email, password });
+      console.log('Login successful:', user);
       
       setCookie('authToken', session, 30);
       localStorage.setItem('authToken', session);
@@ -37,11 +39,14 @@ export function useUserData() {
 
       router.refresh();
       
-      if (user.user_type === 'worker') {
-        router.push('/worker-profile');
-      } else {
-        router.push('/profile');
-      }
+      const redirectPath = user.user_type === 'admin' 
+        ? '/admin' 
+        : user.user_type === 'worker'
+          ? '/worker-profile'
+          : '/profile';
+      
+      console.log('Redirecting to:', redirectPath);
+      router.push(redirectPath);
     } catch (error) {
       console.error('Login error:', error);
       setError('An error occurred during login');

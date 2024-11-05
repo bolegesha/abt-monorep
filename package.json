@@ -6,7 +6,11 @@
     "build": "turbo build",
     "dev": "turbo dev",
     "lint": "turbo lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "postinstall": "node scripts/setup-env.js",
+    "clean": "turbo run clean && rm -rf node_modules **/node_modules .turbo **/.next out dist build",
+    "clean:cache": "rm -rf .turbo && rm -rf **/node_modules/.cache && rm -rf **/.next/cache",
+    "clean:git": "git gc --aggressive --prune=now"
   },
   "devDependencies": {
     "@repo/typescript-config": "workspace:*",
@@ -17,5 +21,9 @@
   "workspaces": [
     "apps/*",
     "packages/*"
-  ]
+  ],
+  "dependencies": {
+    "@repo/api": "workspace:*",
+    "@repo/database": "workspace:*"
+  }
 }

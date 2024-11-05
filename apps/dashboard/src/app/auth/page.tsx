@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useUserData } from '@repo/database';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -17,10 +17,26 @@ const InteractiveMap = dynamic(
 
 export default function AuthPage() {
   const router = useRouter();
-  const { login, signup, error: authError, loading } = useUserData();
+  const { login, signup, error: authError, loading, user } = useUserData();
   const [isLogin, setIsLogin] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!loading && user) {
+      // Redirect based on user type if already authenticated
+      switch (user.user_type) {
+        case 'admin':
+          router.replace('/admin');
+          break;
+        case 'worker':
+          router.replace('/worker-profile');
+          break;
+        default:
+          router.replace('/profile');
+      }
+    }
+  }, [user, loading, router]);
 
   const handleAuth = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

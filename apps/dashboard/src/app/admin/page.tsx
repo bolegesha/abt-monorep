@@ -28,13 +28,13 @@ export default function AdminPage() {
     const { user, token, loading, logout } = useUserData();
     const router = useRouter();
     const [isCollapsed, setIsCollapsed] = useState(false);
-    const [activeSection, setActiveSection] = useState('dashboard');
+    const [activeSection, setActiveSection] = useState('profile');
     const [isAddingUser, setIsAddingUser] = useState(false);
     const [userList, setUserList] = useState<User[]>([]);
     const [formError, setFormError] = useState<string | null>(null);
 
     const sidebarItems = [
-        { icon: Gauge, label: 'Статистика', href: '#dashboard' },
+        { icon: Gauge, label: 'Статистика', href: '#profile' },
         { icon: Users, label: 'Пользователи', href: '#users' },
         { icon: UserCircle, label: 'Профиль', href: '#profile' },
         { icon: Settings, label: 'Настройки', href: '#settings' },
@@ -109,10 +109,28 @@ export default function AdminPage() {
     };
 
     useEffect(() => {
-        if (!loading && (!user || user.user_type !== 'admin')) {
-            router.push('/auth');
-        }
-    }, [user, loading, router]);
+        const checkAuth = async () => {
+            if (!loading) {
+                if (!user || !token) {
+                    router.replace('/auth');
+                    return;
+                }
+                
+                if (user.user_type !== 'admin') {
+                    // Redirect non-admin users to appropriate pages
+                    switch (user.user_type) {
+                        case 'worker':
+                            router.replace('/worker-profile');
+                            break;
+                        default:
+                            router.replace('/profile');
+                    }
+                }
+            }
+        };
+
+        checkAuth();
+    }, [user, loading, router, token]);
 
     useEffect(() => {
         if (activeSection === 'users') {
@@ -301,7 +319,7 @@ export default function AdminPage() {
                         </div>
                     )}
 
-                    {activeSection === 'dashboard' && (
+                    {activeSection === 'profile' && (
                         <div className="space-y-4">
                             <h1 className="text-2xl font-semibold text-[#1D1D1F]">Статистика</h1>
                         </div>
