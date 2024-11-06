@@ -1,6 +1,7 @@
 {
   "/profile/page": "app/profile/page.js",
-  "/worker-profile/page": "app/worker-profile/page.js",
   "/auth/page": "app/auth/page.js",
-  "/admin/page": "app/admin/page.js"
+  "/admin/page": "app/admin/page.js",
+  "/worker-profile/page": "app/worker-profile/page.js",
+  "/api/calculate/route": "app/api/calculate/route.js"
 }

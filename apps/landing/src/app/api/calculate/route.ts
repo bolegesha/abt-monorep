@@ -1,54 +1,86 @@
 import { NextResponse } from 'next/server';
-import { getShippingRates, getBaseCosts } from '@repo/database';
+import { db } from '@repo/database';
+import { shippingRoutes, baseCosts } from '@repo/database';
+import { and, eq } from 'drizzle-orm';
+
+interface CalculationRequest {
+  weight: number;
+  length: number | null;
+  width: number | null;
+  height: number | null;
+  startCity: string;
+  endCity: string;
+  shippingType: 'composition' | 'door';
+}
 
 export async function POST(request: Request) {
-    try {
-        const body = await request.json();
-        
-        // Validation
-        if (!body.weight || !body.startCity || !body.endCity) {
-            return NextResponse.json(
-                { message: 'Please fill in all required fields' },
-                { status: 400 }
-            );
-        }
+  try {
+    const body: CalculationRequest = await request.json();
 
-        // Fetch rates and costs
-        const [rates, baseCosts] = await Promise.all([
-            getShippingRates(body.startCity, body.endCity),
-            getBaseCosts()
-        ]);
-
-        // Calculate costs
-        const pricePerKg = body.shippingType === "composition"
-            ? Number(rates.price_per_kg_composition)
-            : Number(rates.price_per_kg_door);
-        const baseCost = body.shippingType === "composition"
-            ? Number(rates.base_cost_composition)
-            : Number(rates.base_cost_door);
-
-        // Calculate final cost
-        let finalCost = baseCost;
-        if (body.weight > 20) {
-            finalCost += (body.weight - 20) * pricePerKg;
-        }
-
-        if (body.length && body.width && body.height) {
-            const volumeWeight = (body.length * body.width * body.height) / 5000;
-            const volumeCost = volumeWeight * pricePerKg;
-            finalCost = Math.max(volumeCost, finalCost);
-        }
-
-        return NextResponse.json({
-            finalCost: Math.round(finalCost),
-            deliveryEstimate: `${rates.estimated_delivery_days_min}-${rates.estimated_delivery_days_max} дней`
-        });
-
-    } catch (error) {
-        console.error('Calculation error:', error);
-        return NextResponse.json(
-            { message: 'Failed to calculate shipping cost' },
-            { status: 500 }
-        );
+    if (!body.weight || !body.startCity || !body.endCity) {
+      return NextResponse.json(
+        { message: 'Please fill in all required fields' },
+        { status: 400 }
+      );
     }
+
+    // Get shipping rates
+    const [route] = await db
+      .select()
+      .from(shippingRoutes)
+      .where(and(
+        eq(shippingRoutes.startCity, body.startCity),
+        eq(shippingRoutes.endCity, body.endCity)
+      ));
+
+    if (!route) {
+      return NextResponse.json(
+        { message: 'No shipping rates found for this route' },
+        { status: 404 }
+      );
+    }
+
+    // Get base costs
+    const [costs] = await db.select().from(baseCosts);
+
+    if (!costs) {
+      return NextResponse.json(
+        { message: 'Base costs not found' },
+        { status: 404 }
+      );
+    }
+
+    const pricePerKg = body.shippingType === "composition"
+      ? Number(route.pricePerKgComposition)
+      : Number(route.pricePerKgDoor);
+    
+    const baseCost = body.shippingType === "composition"
+      ? Number(costs.baseCostComposition)
+      : Number(costs.baseCostDoor);
+
+    // Calculate cost by weight
+    let costByWeight = body.weight <= 20
+      ? baseCost
+      : baseCost + (body.weight - 20) * pricePerKg;
+
+    // Calculate cost by volume if dimensions are provided
+    let finalCost = costByWeight;
+    if (body.length && body.width && body.height) {
+      const volumeWeight = (body.length * body.width * body.height) / 5000;
+      const volumeCost = volumeWeight * pricePerKg;
+      finalCost = Math.max(volumeCost, costByWeight);
+    }
+
+    return NextResponse.json({
+      finalCost: Math.round(finalCost),
+      deliveryEstimate: `от ${route.estimatedDeliveryDaysMin} до ${route.estimatedDeliveryDaysMax} дней`
+    });
+
+  } catch (error) {
+    console.error('Calculation error:', error);
+    return NextResponse.json(
+      { message: error instanceof Error ? error.message : 'Failed to calculate shipping cost' },
+      { status: 500 }
+    );
+  }
 } 

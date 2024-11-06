@@ -5,12 +5,12 @@ import { useRouter } from 'next/navigation';
 import { Button } from "@/components/ui/button";
 import { useUserData } from '@repo/database';
 import { Sidebar } from '@/components/SideBar';
-import { UserCircle, Settings, Bell, HelpCircle, House, Moon, Volume2, Globe, Key } from 'lucide-react';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Switch } from "@/components/ui/switch";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { UserCircle, Settings, Bell, HelpCircle, House, Moon, Volume2, Globe, Key, Calculator } from 'lucide-react';
+// import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+// import { Switch } from "@/components/ui/switch";
+// import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+// import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Label } from "@/components/ui/label";
 
 export default function BasicProfilePage() {
@@ -20,8 +20,16 @@ export default function BasicProfilePage() {
     const [activeSection, setActiveSection] = useState('profile');
 
     const handleHomeClick = () => {
-        // Redirect to landing page (port 3000)
         window.location.href = 'http://localhost:3000';
+    };
+
+    const handleLogout = async () => {
+        try {
+            await logout();
+            // The logout function will handle the redirect to localhost:3000
+        } catch (error) {
+            console.error('Logout failed:', error);
+        }
     };
 
     const sidebarItems = [
@@ -34,6 +42,7 @@ export default function BasicProfilePage() {
         { icon: Settings, label: 'Настройки', href: '#settings' },
         { icon: Bell, label: 'Заказы', href: '#orders' },
         { icon: HelpCircle, label: 'Помогите', href: '#help' },
+        { icon: Calculator, label: 'Калькулятор', href: '/calculator' },
     ];
 
     const handleSidebarItemClick = (sectionId: string) => {
@@ -45,18 +54,36 @@ export default function BasicProfilePage() {
     };
 
     useEffect(() => {
-        if (!loading && !user) {
-            router.push('/auth');
+        if (!loading) {
+            if (!user || !token) {
+                router.replace('/auth');
+                return;
+            }
+            
+            // Redirect based on user type
+            if (user.user_type !== 'user') {
+                switch (user.user_type) {
+                    case 'admin':
+                        router.replace('/admin');
+                        break;
+                    case 'worker':
+                        router.replace('/worker-profile');
+                        break;
+                }
+            }
         }
-        if (user && user.user_type !== 'user') {
-            router.push('/worker-profile');
-        }
-    }, [user, loading, router]);
+    }, [user, token, loading, router]);
 
+    // Show loading state
     if (loading) {
-        return <div className="flex items-center justify-center h-screen text-[#00358E]">Loading...</div>;
+        return (
+            <div className="flex items-center justify-center min-h-screen bg-[#F5F5F7]">
+                <div className="text-[#00358E] text-xl">Loading...</div>
+            </div>
+        );
     }
 
+    // Don't render anything while redirecting
     if (!user || !token || user.user_type !== 'user') {
         return null;
     }
@@ -97,7 +124,7 @@ export default function BasicProfilePage() {
                             </CardContent>
                             <CardFooter>
                                 <Button
-                                    onClick={logout}
+                                    onClick={handleLogout}
                                     className="bg-[#D1350F] text-white py-2 px-4 rounded-lg hover:bg-red-400 transition-colors"
                                 >
                                     Выйти

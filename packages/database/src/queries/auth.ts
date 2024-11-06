@@ -1,24 +1,36 @@
 import { db } from '../db';
 import { users, sessions } from '../schema';
-import { eq, and, gt } from 'drizzle-orm';
-import type { User } from '../schema';
+import { eq } from 'drizzle-orm';
 
-export async function getUserBySession(token: string): Promise<User | null> {
-  const [result] = await db
-    .select({
-      user: users,
-    })
-    .from(sessions)
-    .where(
-      and(
-        eq(sessions.token, token),
-        gt(sessions.expiresAt, new Date())
-      )
-    )
-    .innerJoin(users, eq(sessions.userId, users.id))
-    .limit(1);
+export async function getUserBySession(token: string) {
+  try {
+    const [session] = await db
+      .select()
+      .from(sessions)
+      .where(eq(sessions.token, token))
+      .limit(1);
 
-  return result?.user || null;
+    if (!session) {
+      return null;
+    }
+
+    // Check if session is expired
+    if (new Date() > session.expiresAt) {
+      await db.delete(sessions).where(eq(sessions.token, token));
+      return null;
+    }
+
+    const [user] = await db
+      .select()
+      .from(users)
+      .where(eq(users.id, session.userId))
+      .limit(1);
+
+    return user || null;
+  } catch (error) {
+    console.error('Error getting user by session:', error);
+    return null;
+  }
 }
 
 export async function getUserById(id: string): Promise<User | null> {

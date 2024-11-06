@@ -99,6 +99,58 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 
 eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   noop: () => (/* binding */ noop),\n/* harmony export */   shouldThrowError: () => (/* binding */ shouldThrowError)\n/* harmony export */ });\n// src/utils.ts\nfunction shouldThrowError(throwError, params) {\n  if (typeof throwError === \"function\") {\n    return throwError(...params);\n  }\n  return !!throwError;\n}\nfunction noop() {\n}\n\n//# sourceMappingURL=utils.js.map//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiKHNzcikvLi4vLi4vbm9kZV9tb2R1bGVzLy5wbnBtL0B0YW5zdGFjaytyZWFjdC1xdWVyeUA1LjU5LjE5X3JlYWN0QDE4LjMuMS9ub2RlX21vZHVsZXMvQHRhbnN0YWNrL3JlYWN0LXF1ZXJ5L2J1aWxkL21vZGVybi91dGlscy5qcyIsIm1hcHBpbmdzIjoiOzs7OztBQUFBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUlFO0FBQ0YiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly9kYXNoYm9hcmQvLi4vLi4vbm9kZV9tb2R1bGVzLy5wbnBtL0B0YW5zdGFjaytyZWFjdC1xdWVyeUA1LjU5LjE5X3JlYWN0QDE4LjMuMS9ub2RlX21vZHVsZXMvQHRhbnN0YWNrL3JlYWN0LXF1ZXJ5L2J1aWxkL21vZGVybi91dGlscy5qcz9kY2M3Il0sInNvdXJjZXNDb250ZW50IjpbIi8vIHNyYy91dGlscy50c1xuZnVuY3Rpb24gc2hvdWxkVGhyb3dFcnJvcih0aHJvd0Vycm9yLCBwYXJhbXMpIHtcbiAgaWYgKHR5cGVvZiB0aHJvd0Vycm9yID09PSBcImZ1bmN0aW9uXCIpIHtcbiAgICByZXR1cm4gdGhyb3dFcnJvciguLi5wYXJhbXMpO1xuICB9XG4gIHJldHVybiAhIXRocm93RXJyb3I7XG59XG5mdW5jdGlvbiBub29wKCkge1xufVxuZXhwb3J0IHtcbiAgbm9vcCxcbiAgc2hvdWxkVGhyb3dFcnJvclxufTtcbi8vIyBzb3VyY2VNYXBwaW5nVVJMPXV0aWxzLmpzLm1hcCJdLCJuYW1lcyI6W10sInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///(ssr)/../../node_modules/.pnpm/@tanstack+react-query@5.59.19_react@18.3.1/node_modules/@tanstack/react-query/build/modern/utils.js\n");
 
+/***/ }),
+
+/***/ "(rsc)/../../node_modules/.pnpm/@tanstack+react-query@5.59.19_react@18.3.1/node_modules/@tanstack/react-query/build/modern/useMutation.js":
+/*!******************************************************************************************************************************************!*\
+  !*** ../../node_modules/.pnpm/@tanstack+react-query@5.59.19_react@18.3.1/node_modules/@tanstack/react-query/build/modern/useMutation.js ***!
+  \******************************************************************************************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   useMutation: () => (/* binding */ e0)
+/* harmony export */ });
+/* harmony import */ var next_dist_build_webpack_loaders_next_flight_loader_module_proxy__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! next/dist/build/webpack/loaders/next-flight-loader/module-proxy */ "(rsc)/../../node_modules/.pnpm/next@14.2.6_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/build/webpack/loaders/next-flight-loader/module-proxy.js");
+
+const proxy = (0,next_dist_build_webpack_loaders_next_flight_loader_module_proxy__WEBPACK_IMPORTED_MODULE_0__.createProxy)(String.raw`/Users/aldiyarbolegenov/my-monorepo/node_modules/.pnpm/@tanstack+react-query@5.59.19_react@18.3.1/node_modules/@tanstack/react-query/build/modern/useMutation.js`)
+
+// Accessing the __esModule property and exporting $$typeof are required here.
+// The __esModule getter forces the proxy target to create the default export
+// and the $$typeof value is for rendering logic to determine if the module
+// is a client boundary.
+const { __esModule, $$typeof } = proxy;
+const __default__ = proxy.default;
+
+const e0 = (0,next_dist_build_webpack_loaders_next_flight_loader_module_proxy__WEBPACK_IMPORTED_MODULE_0__.createProxy)(String.raw`/Users/aldiyarbolegenov/my-monorepo/node_modules/.pnpm/@tanstack+react-query@5.59.19_react@18.3.1/node_modules/@tanstack/react-query/build/modern/useMutation.js#useMutation`);
+
+
+/***/ }),
+
+/***/ "(rsc)/../../node_modules/.pnpm/@tanstack+react-query@5.59.19_react@18.3.1/node_modules/@tanstack/react-query/build/modern/useQuery.js":
+/*!***************************************************************************************************************************************!*\
+  !*** ../../node_modules/.pnpm/@tanstack+react-query@5.59.19_react@18.3.1/node_modules/@tanstack/react-query/build/modern/useQuery.js ***!
+  \***************************************************************************************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   useQuery: () => (/* binding */ e0)
+/* harmony export */ });
+/* harmony import */ var next_dist_build_webpack_loaders_next_flight_loader_module_proxy__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! next/dist/build/webpack/loaders/next-flight-loader/module-proxy */ "(rsc)/../../node_modules/.pnpm/next@14.2.6_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/build/webpack/loaders/next-flight-loader/module-proxy.js");
+
+const proxy = (0,next_dist_build_webpack_loaders_next_flight_loader_module_proxy__WEBPACK_IMPORTED_MODULE_0__.createProxy)(String.raw`/Users/aldiyarbolegenov/my-monorepo/node_modules/.pnpm/@tanstack+react-query@5.59.19_react@18.3.1/node_modules/@tanstack/react-query/build/modern/useQuery.js`)
+
+// Accessing the __esModule property and exporting $$typeof are required here.
+// The __esModule getter forces the proxy target to create the default export
+// and the $$typeof value is for rendering logic to determine if the module
+// is a client boundary.
+const { __esModule, $$typeof } = proxy;
+const __default__ = proxy.default;
+
+const e0 = (0,next_dist_build_webpack_loaders_next_flight_loader_module_proxy__WEBPACK_IMPORTED_MODULE_0__.createProxy)(String.raw`/Users/aldiyarbolegenov/my-monorepo/node_modules/.pnpm/@tanstack+react-query@5.59.19_react@18.3.1/node_modules/@tanstack/react-query/build/modern/useQuery.js#useQuery`);
+
+
 /***/ })
 
 };

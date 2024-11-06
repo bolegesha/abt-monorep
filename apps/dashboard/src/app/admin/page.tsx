@@ -319,11 +319,6 @@ export default function AdminPage() {
                         </div>
                     )}
 
-                    {activeSection === 'profile' && (
-                        <div className="space-y-4">
-                            <h1 className="text-2xl font-semibold text-[#1D1D1F]">Статистика</h1>
-                        </div>
-                    )}
 
                     {activeSection === 'notifications' && (
                         <div className="space-y-4">

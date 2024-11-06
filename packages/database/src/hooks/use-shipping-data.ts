@@ -1,10 +1,11 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { getShippingRates, getCitiesList } from '../lib/shipping';
 
-interface ShippingDataResponse {
+interface ShippingData {
   cities: string[];
-  rates?: {
+  rates: {
     price_per_kg_composition: number;
     price_per_kg_door: number;
     estimated_delivery_days_min: number;
@@ -14,37 +15,41 @@ interface ShippingDataResponse {
   } | null;
 }
 
-export function useShippingData(startCity: string, endCity: string): [ShippingDataResponse, string | null] {
-  const [data, setData] = useState<ShippingDataResponse>({ cities: [] });
+export function useShippingData(startCity?: string, endCity?: string) {
+  const [data, setData] = useState<ShippingData>({ cities: [], rates: null });
   const [error, setError] = useState<string | null>(null);
 
+  // Fetch cities
   useEffect(() => {
-    // Mock data for development
-    const mockCities = [
-      'Астана',
-      'Алматы',
-      'Шымкент',
-      'Караганда',
-      'Актобе',
-      'Тараз',
-      'Павлодар',
-      'Усть-Каменогорск',
-      'Семей',
-      'Атырау',
-    ];
+    async function fetchCities() {
+      try {
+        const citiesList = await getCitiesList();
+        setData(prev => ({ ...prev, cities: citiesList }));
+      } catch (err) {
+        setError('Failed to load cities');
+        console.error('Error fetching cities:', err);
+      }
+    }
 
-    setData({ 
-      cities: mockCities,
-      rates: startCity && endCity ? {
-        price_per_kg_composition: 100,
-        price_per_kg_door: 150,
-        estimated_delivery_days_min: 2,
-        estimated_delivery_days_max: 5,
-        base_cost_composition: 1000,
-        base_cost_door: 1500
-      } : null
-    });
+    fetchCities();
+  }, []);
+
+  // Fetch rates when both cities are selected
+  useEffect(() => {
+    async function fetchRates() {
+      if (startCity && endCity) {
+        try {
+          const rates = await getShippingRates(startCity, endCity);
+          setData(prev => ({ ...prev, rates }));
+        } catch (err) {
+          setError('Failed to load shipping rates');
+          console.error('Error fetching rates:', err);
+        }
+      }
+    }
+
+    fetchRates();
   }, [startCity, endCity]);
 
-  return [data, error];
+  return [data, error] as const;
 } 

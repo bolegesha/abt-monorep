@@ -6,9 +6,9 @@ import { signIn, signUp, signOut, createSession } from '../mutations/auth';
 import { getUserBySession } from '../queries/auth';
 import type { User, LoginSchema } from '../schema';
 
-const setCookie = (name: string, value: string, days: number) => {
-  const expires = new Date(Date.now() + days * 24 * 60 * 60 * 1000).toUTCString();
-  document.cookie = `${name}=${value}; expires=${expires}; path=/`;
+const setCookie = (name: string, value: string) => {
+  const threeHours = new Date(Date.now() + 3 * 60 * 60 * 1000).toUTCString();
+  document.cookie = `${name}=${value}; expires=${threeHours}; path=/`;
 };
 
 const deleteCookie = (name: string) => {
@@ -27,29 +27,37 @@ export function useUserData() {
     setLoading(true);
     setError(null);
     try {
-      console.log('Attempting login...');
-      const { user, session } = await signIn({ email, password });
-      console.log('Login successful:', user);
-      
-      setCookie('authToken', session, 30);
-      localStorage.setItem('authToken', session);
-      
-      setUser(user);
-      setToken(session);
+      const response = await fetch('/api/auth', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
 
-      router.refresh();
+      const data = await response.json();
+
+      if (!response.ok || !data.success) {
+        throw new Error(data.error || 'Authentication failed');
+      }
+
+      setCookie('authToken', data.token);
+      localStorage.setItem('authToken', data.token);
       
-      const redirectPath = user.user_type === 'admin' 
-        ? '/admin' 
-        : user.user_type === 'worker'
-          ? '/worker-profile'
-          : '/profile';
-      
-      console.log('Redirecting to:', redirectPath);
-      router.push(redirectPath);
+      setUser(data.user);
+      setToken(data.token);
+
+      // Redirect based on user type
+      if (data.user.user_type === 'admin') {
+        router.push('/admin');
+      } else if (data.user.user_type === 'worker') {
+        router.push('/worker-profile');
+      } else {
+        router.push('/profile');
+      }
     } catch (error) {
       console.error('Login error:', error);
-      setError('An error occurred during login');
+      setError(error instanceof Error ? error.message : 'Login failed');
       throw error;
     } finally {
       setLoading(false);
@@ -67,7 +75,7 @@ export function useUserData() {
         user_type: userType,
       });
 
-      setCookie('authToken', session, 30);
+      setCookie('authToken', session);
       localStorage.setItem('authToken', session);
 
       setUser(user);
@@ -90,13 +98,20 @@ export function useUserData() {
   const logout = async () => {
     setLoading(true);
     try {
-      const currentToken = token || localStorage.getItem('authToken');
-      if (currentToken) {
-        await signOut(currentToken);
-        localStorage.removeItem('authToken');
-        deleteCookie('authToken');
+      // Call the logout API endpoint
+      const response = await fetch('/api/logout', {
+        method: 'POST',
+      });
+
+      if (!response.ok) {
+        throw new Error('Logout failed');
       }
+
+      // Clear local storage and cookies
+      localStorage.removeItem('authToken');
+      deleteCookie('authToken');
       
+      // Clear state
       setUser(null);
       setToken(null);
       

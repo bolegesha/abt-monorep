@@ -1,3 +1,5 @@
 {
+  "/calculator/page": "app/calculator/page.js",
+  "/api/calculate/route": "app/api/calculate/route.js",
   "/page": "app/page.js"
 }

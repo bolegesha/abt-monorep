@@ -42,26 +42,33 @@ export async function signUp(data: Omit<NewUser, 'id'>) {
   return { user, session: session.token };
 }
 
-export async function signIn(data: LoginSchema) {
-  const [user] = await db
-    .select()
-    .from(users)
-    .where(eq(users.email, data.email))
-    .limit(1);
+export async function signIn({ email, password }: LoginSchema) {
+  try {
+    console.log('Signing in with:', { email, password });
+    const [user] = await db
+      .select()
+      .from(users)
+      .where(eq(users.email, email))
+      .limit(1);
 
-  if (!user) {
-    throw new AuthError('Invalid credentials');
+    if (!user) {
+      throw new AuthError('Invalid credentials');
+    }
+
+    const isValidPassword = await compare(password, user.password);
+    if (!isValidPassword) {
+      throw new AuthError('Invalid credentials');
+    }
+
+    const session = await createSession(user.id);
+    if (!session) throw new AuthError('Failed to create session');
+
+    console.log('Sign in result:', { user, session: session.token });
+    return { user, session: session.token };
+  } catch (error) {
+    console.error('Sign in error:', error);
+    throw error;
   }
-
-  const isValidPassword = await compare(data.password, user.password);
-  if (!isValidPassword) {
-    throw new AuthError('Invalid credentials');
-  }
-
-  const session = await createSession(user.id);
-  if (!session) throw new AuthError('Failed to create session');
-
-  return { user, session: session.token };
 }
 
 export async function createSession(userId: string) {
@@ -75,7 +82,7 @@ export async function createSession(userId: string) {
       id: nanoid(),
       userId,
       token: nanoid(32),
-      expiresAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), // 30 days
+      expiresAt: new Date(Date.now() + 3 * 60 * 60 * 1000), // 3 hours
     })
     .returning();
 

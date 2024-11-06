@@ -1,48 +1,65 @@
 import { db } from '../db';
-import { shippingRates } from '../schema';
-import { and, eq, sql } from 'drizzle-orm';
+import { shippingRoutes, baseCosts } from '../schema';
+import { and, eq } from 'drizzle-orm';
 
-export async function getShippingRates(startCity: string, endCity: string) {
-    const [rate] = await db
-        .select()
-        .from(shippingRates)
-        .where(
-            and(
-                eq(shippingRates.startCity, startCity),
-                eq(shippingRates.endCity, endCity)
-            )
-        )
-        .limit(1);
+export interface ShippingRates {
+  price_per_kg_composition: number;
+  price_per_kg_door: number;
+  estimated_delivery_days_min: number;
+  estimated_delivery_days_max: number;
+  base_cost_composition: number;
+  base_cost_door: number;
+}
 
-    if (!rate) {
-        throw new Error('No shipping rates found for this route');
-    }
+export async function getShippingRates(startCity: string, endCity: string): Promise<ShippingRates> {
+  const [route] = await db
+    .select()
+    .from(shippingRoutes)
+    .where(and(
+      eq(shippingRoutes.startCity, startCity),
+      eq(shippingRoutes.endCity, endCity)
+    ));
 
-    return {
-        price_per_kg_composition: rate.pricePerKgComposition,
-        price_per_kg_door: rate.pricePerKgDoor,
-        estimated_delivery_days_min: rate.estimatedDeliveryDaysMin,
-        estimated_delivery_days_max: rate.estimatedDeliveryDaysMax,
-        base_cost_composition: rate.baseCostComposition,
-        base_cost_door: rate.baseCostDoor,
-    };
+  if (!route) {
+    throw new Error('No shipping rates found for this route');
+  }
+
+  const [costs] = await db.select().from(baseCosts);
+
+  if (!costs) {
+    throw new Error('Base costs not found');
+  }
+
+  return {
+    price_per_kg_composition: Number(route.pricePerKgComposition),
+    price_per_kg_door: Number(route.pricePerKgDoor),
+    estimated_delivery_days_min: route.estimatedDeliveryDaysMin,
+    estimated_delivery_days_max: route.estimatedDeliveryDaysMax,
+    base_cost_composition: Number(costs.baseCostComposition),
+    base_cost_door: Number(costs.baseCostDoor),
+  };
+}
+
+export async function getCitiesList(): Promise<string[]> {
+  const citiesResult = await db
+    .select({ city: shippingRoutes.startCity })
+    .from(shippingRoutes)
+    .union(
+      db.select({ city: shippingRoutes.endCity }).from(shippingRoutes)
+    );
+
+  return Array.from(new Set(citiesResult.map(result => result.city)));
 }
 
 export async function getBaseCosts() {
-    return {
-        composition: 1000,
-        door: 1500,
-    };
-}
+  const [costs] = await db.select().from(baseCosts);
+  
+  if (!costs) {
+    throw new Error('Base costs not found');
+  }
 
-export async function getCitiesList() {
-    const result = await db.execute(sql`
-        SELECT DISTINCT city FROM (
-            SELECT start_city as city FROM shipping_rates
-            UNION
-            SELECT end_city as city FROM shipping_rates
-        ) as cities
-        ORDER BY city
-    `);
-    return result.rows.map(row => row.city);
+  return {
+    composition: Number(costs.baseCostComposition),
+    door: Number(costs.baseCostDoor),
+  };
 } 

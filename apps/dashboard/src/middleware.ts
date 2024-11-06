@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
-const publicRoutes = ['/', '/auth'];
+const publicRoutes = ['/auth', '/', '/calculator'];
 
 export function middleware(request: NextRequest) {
   const authToken = request.cookies.get('authToken')?.value;
@@ -15,7 +15,10 @@ export function middleware(request: NextRequest) {
 
   // If user is not logged in and tries to access protected route, redirect to auth
   if (!authToken && !isPublicRoute) {
-    return NextResponse.redirect(new URL('/auth', request.url));
+    const response = NextResponse.redirect(new URL('/auth', request.url));
+    // Clear the cookie on the response as well
+    response.cookies.delete('authToken');
+    return response;
   }
 
   return NextResponse.next();
@@ -23,13 +26,6 @@ export function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    /*
-     * Match all request paths except for the ones starting with:
-     * - api (API routes)
-     * - _next/static (static files)
-     * - _next/image (image optimization files)
-     * - favicon.ico (favicon file)
-     */
     '/((?!api|_next/static|_next/image|favicon.ico).*)',
   ],
 }; 
