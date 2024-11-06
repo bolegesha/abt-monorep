@@ -59,9 +59,9 @@ export async function POST(request: Request) {
       : Number(costs.baseCostDoor);
 
     // Calculate cost by weight
-    let costByWeight = body.weight <= 20
+    let costByWeight = body.weight <= 25
       ? baseCost
-      : baseCost + (body.weight - 20) * pricePerKg;
+      : baseCost + (body.weight - 25) * pricePerKg;
 
     // Calculate cost by volume if dimensions are provided
     let finalCost = costByWeight;

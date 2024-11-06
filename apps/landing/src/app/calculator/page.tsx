@@ -17,18 +17,18 @@ const UnifiedTransportCalculator = dynamic(
       </div>
     );
   }),
-  { 
-    ssr: false,
-    loading: () => (
-      <div className="min-h-screen bg-[#F5F5F7] flex items-center justify-center p-4">
-        <div className="bg-white p-8 rounded-xl shadow-lg">
-          <h2 className="text-xl text-gray-600">
-            Loading calculator...
-          </h2>
-        </div>
-      </div>
-    )
-  }
+  // { 
+  //   ssr: false,
+  //   loading: () => (
+  //     <div className="min-h-screen bg-[#F5F5F7] flex items-center justify-center p-4">
+  //       <div className="bg-white p-8 rounded-xl shadow-lg">
+  //         <h2 className="text-xl text-gray-600">
+  //           Loading calculator...
+  //         </h2>
+  //       </div>
+  //     </div>
+  //   )
+  // }
 );
 
 export default function StandardCalculatorPage() {

@@ -25,5 +25,13 @@
   "dependencies": {
     "@repo/api": "workspace:*",
     "@repo/database": "workspace:*"
+  },
+  "resolutions": {
+    "drizzle-orm": "0.29.5"
+  },
+  "pnpm": {
+    "overrides": {
+      "drizzle-orm": "0.29.5"
+    }
   }
 }

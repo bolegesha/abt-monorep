@@ -6,7 +6,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
+import { Loader2 } from "lucide-react"; // Import loading spinner
 
 interface CalculationResponse {
   finalCost: number;
@@ -37,12 +38,14 @@ export default function UnifiedTransportCalculator({ calculatorType }: Transport
   const [finalCost, setFinalCost] = useState<number | null>(null);
   const [deliveryEstimate, setDeliveryEstimate] = useState<string | null>(null);
   const [calculationError, setCalculationError] = useState<string | null>(null);
+  const [isCalculating, setIsCalculating] = useState(false);
 
   const [{ cities, rates }, fetchError] = useShippingData(startCity, endCity);
 
   const calculateCost = async () => {
     setCalculationError(null);
     setFinalCost(null);
+    setIsCalculating(true);
 
     try {
       const response = await fetch('/api/calculate', {
@@ -70,6 +73,8 @@ export default function UnifiedTransportCalculator({ calculatorType }: Transport
       setDeliveryEstimate(result.deliveryEstimate);
     } catch (error) {
       setCalculationError(error instanceof Error ? error.message : 'Failed to calculate cost');
+    } finally {
+      setIsCalculating(false);
     }
   };
 
@@ -112,7 +117,7 @@ export default function UnifiedTransportCalculator({ calculatorType }: Transport
             <Select
               value={startCity}
               onValueChange={setStartCity}
-              className="w-full"
+              // className="w-full"
             >
               <SelectTrigger className="w-full px-3 py-2 bg-[#F5F5F7] border-none rounded-lg focus:ring-2 focus:ring-[#0071E3] transition-colors text-sm">
                 <SelectValue placeholder="Выберите город" />
@@ -129,7 +134,7 @@ export default function UnifiedTransportCalculator({ calculatorType }: Transport
             <Select
               value={endCity}
               onValueChange={setEndCity}
-              className="w-full"
+              // className="w-full"
             >
               <SelectTrigger className="w-full px-3 py-2 bg-[#F5F5F7] border-none rounded-lg focus:ring-2 focus:ring-[#0071E3] transition-colors text-sm">
                 <SelectValue placeholder="Выберите город" />
@@ -204,13 +209,22 @@ export default function UnifiedTransportCalculator({ calculatorType }: Transport
         <div className="flex space-x-4">
           <Button
             onClick={calculateCost}
-            className="flex-1 bg-[#00358E] text-white py-2 px-4 rounded-lg hover:bg-[#0077ED] transition-colors focus:outline-none focus:ring-2 focus:ring-[#0071E3] focus:ring-opacity-50 text-sm"
+            disabled={isCalculating}
+            className="flex-1 bg-[#00358E] text-white py-2 px-4 rounded-lg hover:bg-[#0077ED] transition-colors focus:outline-none focus:ring-2 focus:ring-[#0071E3] focus:ring-opacity-50 text-sm disabled:opacity-50"
           >
-            Посчитать
+            {isCalculating ? (
+              <>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                Вычисление...
+              </>
+            ) : (
+              'Посчитать'
+            )}
           </Button>
           <Button
             onClick={clear}
-            className="flex-1 bg-[#F5F5F7] text-[#00358E] py-2 px-4 rounded-lg hover:bg-[#E8E8ED] transition-colors focus:outline-none focus:ring-2 focus:ring-[#0071E3] focus:ring-opacity-50 text-sm"
+            disabled={isCalculating}
+            className="flex-1 bg-[#F5F5F7] text-[#00358E] py-2 px-4 rounded-lg hover:bg-[#E8E8ED] transition-colors focus:outline-none focus:ring-2 focus:ring-[#0071E3] focus:ring-opacity-50 text-sm disabled:opacity-50"
           >
             Очистить
           </Button>

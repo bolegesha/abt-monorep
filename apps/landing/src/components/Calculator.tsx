@@ -105,17 +105,17 @@ export default function UnifiedTransportCalculator({ calculatorType }: Transport
         setCalculationError(null);
     };
 
-    if (isLoading) {
-        return (
-            <div className="min-h-screen bg-[#F5F5F7] flex items-center justify-center p-4">
-                <div className="bg-white p-8 rounded-xl shadow-lg">
-                    <h2 className="text-xl text-gray-600 mb-4">
-                        Loading calculator...
-                    </h2>
-                </div>
-            </div>
-        );
-    }
+    // if (isLoading) {
+    //     return (
+    //         <div className="min-h-screen bg-[#F5F5F7] flex items-center justify-center p-4">
+    //             <div className="bg-white p-8 rounded-xl shadow-lg">
+    //                 <h2 className="text-xl text-gray-600 mb-4">
+    //                     Loading calculator...
+    //                 </h2>
+    //             </div>
+    //         </div>
+    //     );
+    // }
 
     return (
         <main className="min-h-screen bg-[#F5F5F7] flex items-center justify-center p-4 sm:p-8 font-sans">

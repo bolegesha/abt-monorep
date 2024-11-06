@@ -1,7 +1,8 @@
 import { NextResponse } from 'next/server';
 import { db } from '@repo/database';
 import { shippingRoutes, baseCosts } from '@repo/database';
-import { and, eq } from 'drizzle-orm';
+import { sql } from 'drizzle-orm';
+import { eq } from 'drizzle-orm';  // Change import to specific database type
 
 interface CalculationRequest {
   weight: number;
@@ -22,16 +23,13 @@ export async function POST(request: Request) {
         { message: 'Please fill in all required fields' },
         { status: 400 }
       );
-    }
+    } 
 
-    // Get shipping rates
+    // Get shipping rates using raw SQL conditions
     const [route] = await db
       .select()
       .from(shippingRoutes)
-      .where(and(
-        eq(shippingRoutes.startCity, body.startCity),
-        eq(shippingRoutes.endCity, body.endCity)
-      ));
+      .where(sql`${shippingRoutes.startCity} = ${body.startCity} AND ${shippingRoutes.endCity} = ${body.endCity}`);
 
     if (!route) {
       return NextResponse.json(
@@ -59,9 +57,9 @@ export async function POST(request: Request) {
       : Number(costs.baseCostDoor);
 
     // Calculate cost by weight
-    let costByWeight = body.weight <= 20
+    let costByWeight = body.weight <= 25
       ? baseCost
-      : baseCost + (body.weight - 20) * pricePerKg;
+      : baseCost + (body.weight - 25) * pricePerKg;
 
     // Calculate cost by volume if dimensions are provided
     let finalCost = costByWeight;
@@ -83,4 +81,4 @@ export async function POST(request: Request) {
       { status: 500 }
     );
   }
-} 
+}
