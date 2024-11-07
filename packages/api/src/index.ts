@@ -1,1 +1,1 @@
-export { calculateShipping, getCities, getRates } from './routes/shipping'; 
+export * from './routes/shipping'; 

@@ -20,10 +20,7 @@ export async function createUserProfile(data: Omit<NewUser, 'id'>): Promise<User
 export async function updateUser(id: string, data: Partial<Omit<NewUser, 'id'>>): Promise<User> {
   const [user] = await db
     .update(users)
-    .set({
-      ...data,
-      updatedAt: new Date(),
-    })
+    .set(data)
     .where(eq(users.id, id))
     .returning();
 

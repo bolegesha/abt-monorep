@@ -1,25 +1,41 @@
 {
   "pages": {
-    "/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/page.js"
+    "/_not-found/page": [
+      "static/chunks/webpack-60b3e1b68888594a.js",
+      "static/chunks/caf67b24-b50d4547e9ed2523.js",
+      "static/chunks/649-46a5d0eb7ecbd74a.js",
+      "static/chunks/main-app-cc4edd026ac46ba0.js",
+      "static/chunks/app/_not-found/page-cad06c9ec73aea92.js"
     ],
     "/layout": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/css/app/layout.css",
-      "static/chunks/app/layout.js"
+      "static/chunks/webpack-60b3e1b68888594a.js",
+      "static/chunks/caf67b24-b50d4547e9ed2523.js",
+      "static/chunks/649-46a5d0eb7ecbd74a.js",
+      "static/chunks/main-app-cc4edd026ac46ba0.js",
+      "static/css/5ed75f9d85ffd7cb.css",
+      "static/chunks/216-5f644a2edbe7b2f0.js",
+      "static/chunks/app/layout-c3196c67db9b9473.js"
     ],
     "/about/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/about/page.js"
+      "static/chunks/webpack-60b3e1b68888594a.js",
+      "static/chunks/caf67b24-b50d4547e9ed2523.js",
+      "static/chunks/649-46a5d0eb7ecbd74a.js",
+      "static/chunks/main-app-cc4edd026ac46ba0.js",
+      "static/chunks/app/about/page-d8a1d85d62373e90.js"
+    ],
+    "/page": [
+      "static/chunks/webpack-60b3e1b68888594a.js",
+      "static/chunks/caf67b24-b50d4547e9ed2523.js",
+      "static/chunks/649-46a5d0eb7ecbd74a.js",
+      "static/chunks/main-app-cc4edd026ac46ba0.js",
+      "static/chunks/app/page-005ca67e1fda8565.js"
     ],
     "/calculator/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/calculator/page.js"
+      "static/chunks/webpack-60b3e1b68888594a.js",
+      "static/chunks/caf67b24-b50d4547e9ed2523.js",
+      "static/chunks/649-46a5d0eb7ecbd74a.js",
+      "static/chunks/main-app-cc4edd026ac46ba0.js",
+      "static/chunks/app/calculator/page-0a4557b586a1b3d4.js"
     ]
   }
 }

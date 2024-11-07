@@ -1,6 +1,7 @@
 import { db } from '../db';
 import { users, sessions } from '../schema';
 import { eq } from 'drizzle-orm';
+import type { User } from '../schema';
 
 export async function getUserBySession(token: string) {
   try {

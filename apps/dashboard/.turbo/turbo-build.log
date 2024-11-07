@@ -7,3 +7,59 @@
   - Environments: .env
 
  [37m[1m [22m[39m Creating an optimized production build ...
+ [32m[1m✓[22m[39m Compiled successfully
+[?25l [37m[1m [22m[39m Linting and checking validity of types  [36m.[39m[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m..[39m[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m...[39m[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m.[39m[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m..[39m[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m...[39m[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m.[39m[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m..[39m[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m...[39m[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m.[39m[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m..[39m[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m...[39m[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m.[39m[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m..[39m[2K[1G[?25h [37m[1m [22m[39m Linting and checking validity of types     [32m[1m✓[22m[39m Linting and checking validity of types 
+[?25l [37m[1m [22m[39m Collecting page data  [36m.[39m[2K[1G [37m[1m [22m[39m Collecting page data  [36m..[39mThe `fetchConnectionCache` option is deprecated (now always `true`)
+The `fetchConnectionCache` option is deprecated (now always `true`)
+The `fetchConnectionCache` option is deprecated (now always `true`)
+[2K[1G[?25h [37m[1m [22m[39m Collecting page data     [32m[1m✓[22m[39m Collecting page data 
+[?25l [37m[1m [22m[39m Generating static pages (0/14)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (0/14)  [36m[=   ][39mThe `fetchConnectionCache` option is deprecated (now always `true`)
+The `fetchConnectionCache` option is deprecated (now always `true`)
+The `fetchConnectionCache` option is deprecated (now always `true`)
+The `fetchConnectionCache` option is deprecated (now always `true`)
+The `fetchConnectionCache` option is deprecated (now always `true`)
+The `fetchConnectionCache` option is deprecated (now always `true`)
+Check auth error: n [Error]: Dynamic server usage: Route /api/check-auth couldn't be rendered statically because it used `cookies`. See more info here: https://nextjs.org/docs/messages/dynamic-server-error
+    at l (/Users/aldiyarbolegenov/my-monorepo/apps/dashboard/.next/server/chunks/796.js:1:37233)
+    at f (/Users/aldiyarbolegenov/my-monorepo/apps/dashboard/.next/server/chunks/337.js:1:1677)
+    at u (/Users/aldiyarbolegenov/my-monorepo/apps/dashboard/.next/server/app/api/check-auth/route.js:1:900)
+    at /Users/aldiyarbolegenov/my-monorepo/node_modules/.pnpm/next@14.2.6_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:36264
+    at /Users/aldiyarbolegenov/my-monorepo/node_modules/.pnpm/next@14.2.6_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/server/lib/trace/tracer.js:140:36
+    at NoopContextManager.with (/Users/aldiyarbolegenov/my-monorepo/node_modules/.pnpm/next@14.2.6_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:7062)
+    at ContextAPI.with (/Users/aldiyarbolegenov/my-monorepo/node_modules/.pnpm/next@14.2.6_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:518)
+    at NoopTracer.startActiveSpan (/Users/aldiyarbolegenov/my-monorepo/node_modules/.pnpm/next@14.2.6_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:18093)
+    at ProxyTracer.startActiveSpan (/Users/aldiyarbolegenov/my-monorepo/node_modules/.pnpm/next@14.2.6_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:18854)
+    at /Users/aldiyarbolegenov/my-monorepo/node_modules/.pnpm/next@14.2.6_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/server/lib/trace/tracer.js:122:103 {
+  description: "Route /api/check-auth couldn't be rendered statically because it used `cookies`. See more info here: https://nextjs.org/docs/messages/dynamic-server-error",
+  digest: 'DYNAMIC_SERVER_USAGE'
+}
+The `fetchConnectionCache` option is deprecated (now always `true`)
+[2K[1G[?25h [32m[1m✓[22m[39m Generating static pages (14/14)
+[?25l [37m[1m [22m[39m Finalizing page optimization  [36m.[39m[?25l [37m[1m [22m[39m Collecting build traces  [36m.[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m..[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m..[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m...[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m...[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m.[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m.[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m..[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m..[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m...[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m...[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m.[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m.[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m..[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m..[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m...[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m...[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m.[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m.[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m..[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m..[39m[2K[1G[?25h [37m[1m [22m[39m Collecting build traces     [32m[1m✓[22m[39m Collecting build traces 
+[2K[1G[?25h [37m[1m [22m[39m Finalizing page optimization     [32m[1m✓[22m[39m Finalizing page optimization 
+
+[4mRoute (app)[24m                              [4mSize[24m     [4mFirst Load JS[24m
+┌ ○ /                                    7.11 kB         [37m[1m102 kB[22m[39m
+├ ○ /_not-found                          872 B          [37m[1m88.5 kB[22m[39m
+├ ○ /admin                               3.08 kB         [37m[1m318 kB[22m[39m
+├ ƒ /api/auth                            0 B                [37m[1m0 B[22m[39m
+├ ƒ /api/calculate                       0 B                [37m[1m0 B[22m[39m
+├ ƒ /api/check-auth                      0 B                [37m[1m0 B[22m[39m
+├ ƒ /api/logout                          0 B                [37m[1m0 B[22m[39m
+├ ○ /auth                                5.57 kB         [37m[1m308 kB[22m[39m
+├ ○ /calculator                          3.13 kB         [37m[1m325 kB[22m[39m
+├ ○ /dashboard                           2.81 kB         [37m[1m289 kB[22m[39m
+├ ○ /profile                             2.08 kB         [37m[1m317 kB[22m[39m
+└ ○ /worker-profile                      3.27 kB         [37m[1m333 kB[22m[39m
++ First Load JS shared by all            [37m[1m87.7 kB[22m[39m
+  ├ chunks/649-1c1243ca39925294.js       31.5 kB
+  ├ chunks/caf67b24-c416bc4b30e2b97e.js  53.6 kB
+  └ other shared chunks (total)          2.52 kB
+
+
+ƒ Middleware                             [37m[1m27 kB[22m[39m
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+
+[?25h

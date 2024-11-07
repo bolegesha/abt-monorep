@@ -73,8 +73,6 @@ export default function AdminPage() {
                 password: hashedPassword,
                 fullName: formData.get('name') as string,
                 user_type: formData.get('user_type') as UserType,
-                createdAt: new Date(),
-                updatedAt: new Date(),
             }).returning();
 
             if (!newUser) {

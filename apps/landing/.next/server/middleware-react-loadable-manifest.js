@@ -1,1 +1,1 @@
-self.__REACT_LOADABLE_MANIFEST="{\"app/calculator/page.tsx -> @/components/Calculator\":{\"id\":\"app/calculator/page.tsx -> @/components/Calculator\",\"files\":[\"static/chunks/_app-pages-browser_src_components_Calculator_tsx.js\"]}}"
+self.__REACT_LOADABLE_MANIFEST='{"app/calculator/page.tsx -> @/components/Calculator":{"id":6597,"files":["static/chunks/597.9769bc93a6240ab1.js"]}}';

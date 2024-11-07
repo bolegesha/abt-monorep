@@ -218,7 +218,7 @@ export default function WorkerProfilePage() {
                                 <CardTitle className="text-2xl font-semibold text-[#1D1D1F]">Калькулятор стоимости</CardTitle>
                             </CardHeader>
                             <CardContent>
-                                <WCalculator/>
+                                <WCalculator calculatorType="workers"/>
                             </CardContent>
                         </Card>
                     )}

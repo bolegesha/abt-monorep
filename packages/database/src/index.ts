@@ -1,5 +1,6 @@
-// Export everything from schema
+// Export schema and db
 export * from './schema';
+export { db } from './db';
 
 // Export hooks
 export { useShippingData } from './hooks/use-shipping-data';
@@ -9,15 +10,12 @@ export { useUserData } from './hooks/use-user-data';
 export { signIn, signUp, signOut } from './mutations/auth';
 export { getUserBySession } from './queries/auth';
 
-// Export db
-export * from './db';
-
 // Export shipping functions
 export { 
-    getShippingRates, 
-    getCitiesList, 
-    getBaseCosts,
-    type ShippingRates 
+  getShippingRates,
+  getCitiesList,
+  getBaseCosts,
+  type ShippingRates 
 } from './lib/shipping';
 
 // Export cookie utilities

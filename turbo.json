@@ -3,12 +3,16 @@
   "globalEnv": ["DATABASE_URL"],
   "tasks": {
     "build": {
-      "outputs": [".next/**", "!.next/cache/**"],
+      "dependsOn": ["^build"],
+      "outputs": [".next/**", "!.next/cache/**", "dist/**"],
       "env": ["DATABASE_URL"]
     },
     "dev": {
       "persistent": true,
       "env": ["DATABASE_URL"]
+    },
+    "clean": {
+      "cache": false
     }
   }
 }
