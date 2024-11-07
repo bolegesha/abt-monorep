@@ -1,14 +1,14 @@
 {
   "/_not-found/page": "app/_not-found/page.js",
-  "/admin/page": "app/admin/page.js",
   "/api/auth/route": "app/api/auth/route.js",
-  "/api/calculate/route": "app/api/calculate/route.js",
   "/api/check-auth/route": "app/api/check-auth/route.js",
-  "/worker-profile/page": "app/worker-profile/page.js",
+  "/admin/page": "app/admin/page.js",
   "/api/logout/route": "app/api/logout/route.js",
+  "/worker-profile/page": "app/worker-profile/page.js",
   "/dashboard/page": "app/dashboard/page.js",
+  "/page": "app/page.js",
   "/auth/page": "app/auth/page.js",
-  "/calculator/page": "app/calculator/page.js",
+  "/api/calculate/route": "app/api/calculate/route.js",
   "/profile/page": "app/profile/page.js",
-  "/page": "app/page.js"
+  "/calculator/page": "app/calculator/page.js"
 }
