@@ -1,8 +1,9 @@
 {
   "/api/auth/route": "app/api/auth/route.js",
-  "/admin/page": "app/admin/page.js",
-  "/worker-profile/page": "app/worker-profile/page.js",
-  "/profile/page": "app/profile/page.js",
   "/auth/page": "app/auth/page.js",
-  "/api/logout/route": "app/api/logout/route.js"
+  "/worker-profile/page": "app/worker-profile/page.js",
+  "/api/logout/route": "app/api/logout/route.js",
+  "/api/calculate/route": "app/api/calculate/route.js",
+  "/admin/page": "app/admin/page.js",
+  "/profile/page": "app/profile/page.js"
 }

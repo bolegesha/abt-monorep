@@ -46,14 +46,15 @@ export default function NavBar() {
             </div>
 
             <div className="flex items-center justify-end">
+              <Link
+                  href="http://localhost:3002/auth"
+                  className="hover:text-sm font-medium transition-colors duration-200"
+              >
               <button className="bg-[#00358E] hover:bg-blue-600 text-white px-6 py-2 rounded-md text-sm font-medium transition-colors">
-                <Link
-                    href="http://localhost:3002/auth"
-                    className="hover:text-sm font-medium transition-colors duration-200"
-                >
+
                   Профиль
-                </Link>
               </button>
+              </Link>
             </div>
           </div>
         </div>
